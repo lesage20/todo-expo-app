@@ -4,9 +4,10 @@ import { Feather } from '@expo/vector-icons';
 
 interface AddTodoProps {
   onAdd: (text: string) => void;
+  isDark: boolean;
 }
 
-export default function AddTodo({ onAdd }: AddTodoProps) {
+export default function AddTodo({ onAdd, isDark }: AddTodoProps) {
   const [text, setText] = useState('');
 
   const handleAdd = () => {
@@ -18,10 +19,15 @@ export default function AddTodo({ onAdd }: AddTodoProps) {
 
   return (
     <View className="flex-row items-center mb-4">
-      <View className="flex-1 bg-white rounded-lg shadow-sm">
+      <View className={`flex-1 rounded-lg shadow-sm ${
+        isDark ? 'bg-gray-800' : 'bg-white'
+      }`}>
         <TextInput
-          className="h-14 px-4 text-lg text-gray-800"
+          className={`h-14 px-4 text-lg ${
+            isDark ? 'text-white' : 'text-gray-800'
+          }`}
           placeholder="Ajouter une tâche..."
+          placeholderTextColor={isDark ? '#9CA3AF' : '#6B7280'}
           value={text}
           onChangeText={setText}
           onSubmitEditing={handleAdd}
